@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "devenv", "..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe", "{0BD93D8F-BF83-4F71-80D4-D74BF9EBF3F9}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe
+		RemoteMachine = IGOR-LAPTOP
+		StartingDirectory = C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BD93D8F-BF83-4F71-80D4-D74BF9EBF3F9}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {047D5B7D-15B0-4B28-85B0-39DBA4A63DF1}
+	EndGlobalSection
+EndGlobal

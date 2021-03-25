@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OidcApp", "OidcApp.csproj", "{42738043-6CC9-47CD-AF38-AA7580C49F6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42738043-6CC9-47CD-AF38-AA7580C49F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42738043-6CC9-47CD-AF38-AA7580C49F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42738043-6CC9-47CD-AF38-AA7580C49F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42738043-6CC9-47CD-AF38-AA7580C49F6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86600C73-1DAB-4BB0-9CB0-9F029B43FDFA}
+	EndGlobalSection
+EndGlobal
