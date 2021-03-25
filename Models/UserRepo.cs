@@ -26,16 +26,17 @@ namespace OidcApp.Models.Repositories
         {
             if (id != null)
             {
-                UserProfile user = context.UserProfiles.FirstOrDefault(x => x.OId == id.OId && x.OIdProvider == id.OIdProvider);
+                
+                //UserProfile user = context.UserProfiles.FirstOrDefault(x => x.OId == id.OId && x.OIdProvider == id.OIdProvider);
 
-                if (user == null)
-                {
-                    user = id;
+                //if (user == null)
+                //{
+                //    user = id;
 
-                    await context.UserProfiles.AddAsync(user);
+                //    await context.UserProfiles.AddAsync(user);
 
-                    await context.SaveChangesAsync();
-                }
+                //    await context.SaveChangesAsync();
+                //}
 
                 // await userManager.SignIn(httpContext, user);
                 return true;

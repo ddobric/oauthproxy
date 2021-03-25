@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OidcApp", "OidcApp.csproj", "{42738043-6CC9-47CD-AF38-AA7580C49F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OAuthProxy", "OAuthProxy.csproj", "{42738043-6CC9-47CD-AF38-AA7580C49F6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

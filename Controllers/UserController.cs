@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using OidcApp.Models.Entities;
 using OidcApp.Models.Providers;
 using OidcApp.Models.Repositories;
+using System.Linq;
+using System.Web;
 
 namespace OidcApp.Controllers
 {
@@ -93,9 +95,13 @@ namespace OidcApp.Controllers
                 OId = id != null ? id.Value : ""
             };
 
+            var token = authenticateResult.Properties.GetString(".Token.access_token");
+            
             await _repo.GetOrCreateExternalUserAsync(obj, HttpContext);
 
-            return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
+            return Redirect($"https://localhost:44320/inject/{HttpUtility.UrlEncode(token)}");
+
+            //return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
         }
     }
 }
