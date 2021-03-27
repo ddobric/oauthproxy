@@ -27,7 +27,9 @@ namespace OidcApp.Controllers
         {
             if (User.Identity.IsAuthenticated && User.Claims.Any(x => x.Type == System.Security.Claims.ClaimTypes.Name))
             {
-                return jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);              
+                var res = jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);
+                if (res != null)
+                    return res;
             }
             
             return View();

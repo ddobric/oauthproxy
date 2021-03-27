@@ -46,7 +46,11 @@ namespace OAuthProxy.Auth
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                     new Claim(ClaimTypes.NameIdentifier, controller.User.ToString()),
+                    new Claim("provider", controller.User.Identity.AuthenticationType),
+                    new Claim(ClaimTypes.NameIdentifier, controller.User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.NameIdentifier)?.Value),
+                    new Claim(ClaimTypes.Email, controller.User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.Email)?.Value),
+                    new Claim(ClaimTypes.GivenName, controller.User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.GivenName)?.Value),
+                    new Claim(ClaimTypes.Name, controller.User.Claims.FirstOrDefault(c=>c.Type == ClaimTypes.Name)?.Value),
                 }),
 
                 Expires = DateTime.UtcNow.AddDays(7),
