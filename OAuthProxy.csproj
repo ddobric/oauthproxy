@@ -5,14 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\IJwtFactory.cs" />
-    <Compile Remove="Auth\JwtFactory.cs" />
     <Compile Remove="Models\JwtIssuerOptions.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Auth\IJwtFactory.cs" />
-    <None Include="Auth\JwtFactory.cs" />
     <None Include="Models\JwtIssuerOptions.cs" />
   </ItemGroup>
 

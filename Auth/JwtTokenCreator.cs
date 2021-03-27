@@ -23,13 +23,19 @@ namespace OAuthProxy.Auth
             this.config = config;
         }
 
-        public RedirectResult GenerateTokenAndRedirect(string userId, Controller controller)
+        public RedirectResult GenerateTokenAndRedirect(string userName, Controller controller)
         {
             var token = GenerateToken(controller);
 
             var encodedToken = HttpUtility.UrlEncode(token);
 
-            var redirectUrl = this.config.RedirectUrl.Replace("{TOKEN}", encodedToken);
+            var logoutUrl = $"{controller.Request.Scheme}://{controller.Request.Host.Value}/user/Logout";
+
+            var encodedLogoutUrl = HttpUtility.UrlEncode(logoutUrl);
+
+            var encodeduserName = HttpUtility.UrlEncode(userName);
+
+            var redirectUrl = $"{this.config.RedirectUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
 
             return controller.Redirect(redirectUrl);
         }
@@ -70,7 +76,7 @@ namespace OAuthProxy.Auth
 
         public string Audience { get; set; } = "https://korto.com/blazorapp";
 
-        public string Secret { get; set; } = "asdv234234^&%&^%&^hjsdfb2%%%";
+        public string Secret { get; set; } = "asdv234234^&%&^%&^hjsdfb2%%%DDAAxy";
 
         public string RedirectUrl { get; set; } = "https://localhost:44316/admin2/user?token={TOKEN}";
     }
