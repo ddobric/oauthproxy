@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Auth\IJwtFactory.cs" />
+    <Compile Remove="Auth\JwtFactory.cs" />
+    <Compile Remove="Models\JwtIssuerOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Auth\IJwtFactory.cs" />
+    <None Include="Auth\JwtFactory.cs" />
+    <None Include="Models\JwtIssuerOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.3" />

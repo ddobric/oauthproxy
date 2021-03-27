@@ -88,6 +88,8 @@ namespace OidcApp.Controllers
             var email = authenticateResult.Principal.FindFirst(ClaimTypes.Email);
             var name = authenticateResult.Principal.FindFirst(ClaimTypes.Name);
 
+            string idToken = await HttpContext.GetTokenAsync("id_token");
+
             var obj = new UserProfile
             {
                 EmailAddress = email != null ? email.Value : "",
@@ -99,9 +101,9 @@ namespace OidcApp.Controllers
             
             await _repo.GetOrCreateExternalUserAsync(obj, HttpContext);
 
-            return Redirect($"https://localhost:44320/inject/{HttpUtility.UrlEncode(token)}");
-
-            //return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
+            //return Redirect($"https://localhost:44320/inject/{HttpUtility.UrlEncode(token)}");
+            //return Redirect($"https://localhost:44316/admin2/user?token=/{HttpUtility.UrlEncode(token)}");
+            return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
         }
     }
 }
