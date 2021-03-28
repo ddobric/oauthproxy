@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using OAuthProxy.Auth;
+using OAuthProxy;
 using OidcApp.Models;
 
 namespace OidcApp.Controllers

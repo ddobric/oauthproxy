@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace OAuthProxy.Auth
+namespace OAuthProxy
 {
     /// <summary>
     /// Creates the JWT token.
@@ -42,7 +42,10 @@ namespace OAuthProxy.Auth
 
         public string GenerateToken(Controller controller)
         {
-            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(this.config.Secret));
+            var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(this.config.Secret))
+            {
+                KeyId = this.config.Kid,
+            };
 
             var myIssuer = config.Issuer;
             var myAudience = config.Audience;
@@ -66,17 +69,23 @@ namespace OAuthProxy.Auth
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+ 
             return tokenHandler.WriteToken(token);
         }
     }
 
     public class JwtTokenCreatorConfig
     {
-        public string Issuer { get; set; } = "https://korto.com/identityserver";
+        public string Issuer { get; set; } = "https://oauthproxy.com/identityserver";
 
-        public string Audience { get; set; } = "https://korto.com/blazorapp";
+        public string Audience { get; set; } = "https://oauthproxy.com/audience";
 
         public string Secret { get; set; } = "asdv234234^&%&^%&^hjsdfb2%%%DDAAxy";
+
+        /// <summary>
+        /// Keyidentifier ofthe proxy instance.
+        /// </summary>
+        public string Kid { get; set; }
 
         public string RedirectUrl { get; set; } = "https://localhost:44316/admin2/user?token={TOKEN}";
     }

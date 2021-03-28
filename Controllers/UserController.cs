@@ -10,8 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using OidcApp.Models.Entities;
 using OidcApp.Models.Providers;
 using OidcApp.Models.Repositories;
-using System.Linq;
-using System.Web;
 
 namespace OidcApp.Controllers
 {

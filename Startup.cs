@@ -14,8 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using OAuthProxy.Auth;
-//using OidcApp.Auth;
+using OAuthProxy;
 using OidcApp.Models;
 using OidcApp.Models.Entities;
 using OidcApp.Models.Providers;
@@ -41,35 +40,6 @@ namespace OidcApp
             var oidcProviders = new OidcProviders();
             Configuration.Bind("Oidc", oidcProviders);
             services.AddSingleton(oidcProviders);
-
-            //TODO : finish the wire-up and combine JWT based and cookie based flows
-            // jwt wire up
-            // Get options from app settings
-            //services.AddSingleton<IJwtFactory, JwtFactory>();
-            //var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));
-            //// Configure JwtIssuerOptions
-            //services.Configure<JwtIssuerOptions>(options =>
-            //{
-            //    options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
-            //    options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
-            //    options.SigningCredentials = new SigningCredentials(_signingKey, SecurityAlgorithms.HmacSha256);
-            //});
-
-            //var tokenValidationParameters = new TokenValidationParameters
-            //{
-            //    ValidateIssuer = true,
-            //    ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
-
-            //    ValidateAudience = true,
-            //    ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
-
-            //    ValidateIssuerSigningKey = true,
-            //    IssuerSigningKey = _signingKey,
-
-            //    RequireExpirationTime = false,
-            //    ValidateLifetime = true,
-            //    ClockSkew = TimeSpan.Zero
-            //};
 
             JwtTokenCreatorConfig jwtTokenCreatorConfig = new JwtTokenCreatorConfig();
             Configuration.GetSection("JwtTokenCreatorConfig").Bind(jwtTokenCreatorConfig);
