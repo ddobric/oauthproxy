@@ -25,13 +25,19 @@ namespace OidcApp.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated && User.Claims.Any(x => x.Type == System.Security.Claims.ClaimTypes.Name))
+            if (Request.Query.ContainsKey("callbackurl"))
             {
-                var res = jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);
-                if (res != null)
-                    return res;
+                if (User.Identity.IsAuthenticated && User.Claims.Any(x => x.Type == System.Security.Claims.ClaimTypes.Name))
+                {
+
+                    var res = jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);
+                    if (res != null)
+                        return res;
+                }
             }
-            
+            else
+                return Redirect("home/error/Missing callbackurl");
+
             return View();
         }
 
@@ -41,9 +47,10 @@ namespace OidcApp.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpGet, Route("[controller]/error/{msg}")]
+        public IActionResult Error(string msg = null)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier, Error = msg });
         }
     }
 }

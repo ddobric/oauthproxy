@@ -21,19 +21,19 @@
                                 {
                                     case "google":
                         <div class="col-lg-12 p-2">
-                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name" class="btn btn-block btn-danger">
+                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name&callbackurl=@Context.Request.Query["callbackurl"]" class="btn btn-block btn-danger">
                                 <span class="icon-google"></span> Google
                             </a>
                         </div> break;
                                             case "facebook":
                         <div class="col-lg-12 p-2">
-                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name" class="btn btn-block btn-primary">
+                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name&callbackurl=@Context.Request.Query["callbackurl"]" class="btn btn-block btn-primary">
                                 <span class="icon-facebook2"></span> Facebook
                             </a>
                         </div> break;
                                             case "microsoft":
                         <div class="col-lg-12 p-2">
-                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name" class="btn btn-block btn-primary">
+                            <a target="_self" href="~/user/ExternalLogin?provider=@provider.Name&callbackurl=@Context.Request.Query["callbackurl"]" class="btn btn-block btn-primary">
                                 <span class="icon-facebook2"></span> Microsoft
                             </a>
                         </div>break;

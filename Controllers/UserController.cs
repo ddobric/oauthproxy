@@ -43,11 +43,16 @@ namespace OidcApp.Controllers
         public IActionResult Logout()
         {
             _manager.SignOut(this.HttpContext);
-            return LocalRedirect("~/");
+            if (Request.Query.ContainsKey("callbackurl"))
+            {
+                return Redirect($"{Request.Query["callbackurl"]}");
+            }
+            else
+                return LocalRedirect("~/");
         }
 
         [HttpGet, Route("[controller]/ExternalLogin")]
-        public IActionResult ExternalLogin(string returnUrl, string provider = "google")
+        public IActionResult ExternalLogin(string callbackUrl, string provider = "google")
         {
             string authenticationScheme = string.Empty;
 
@@ -62,20 +67,20 @@ namespace OidcApp.Controllers
                 case OidcProviderType.Microsoft:
                     authenticationScheme = MicrosoftAccountDefaults.AuthenticationScheme;
                     break;
-                default:    
+                default:
                     authenticationScheme = GoogleDefaults.AuthenticationScheme;
                     break;
             }
 
             var auth = new AuthenticationProperties
             {
-                RedirectUri = Url.Action(nameof(LoginCallback), new { provider, returnUrl })
+                RedirectUri = Url.Action(nameof(LoginCallback), new { provider, callbackUrl })
             };
 
             return new ChallengeResult(authenticationScheme, auth);
         }
 
-        public async Task<IActionResult> LoginCallback(string provider, string returnUrl = "~/")
+        public async Task<IActionResult> LoginCallback(string provider, string callbackUrl = "~/")
         {
             var authenticateResult = await HttpContext.AuthenticateAsync(SocialAuthenticationDefaults.AuthenticationScheme);
 
@@ -96,12 +101,12 @@ namespace OidcApp.Controllers
             };
 
             var token = authenticateResult.Properties.GetString(".Token.access_token");
-            
+
             await _repo.GetOrCreateExternalUserAsync(obj, HttpContext);
 
             //return Redirect($"https://localhost:44320/inject/{HttpUtility.UrlEncode(token)}");
             //return Redirect($"https://localhost:44316/admin2/user?token=/{HttpUtility.UrlEncode(token)}");
-            return LocalRedirect(string.IsNullOrEmpty(returnUrl) ? "~/" : returnUrl);
+            return LocalRedirect(string.IsNullOrEmpty(callbackUrl) ? "~/" : callbackUrl);
         }
     }
 }

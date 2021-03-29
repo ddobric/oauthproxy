@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -25,20 +26,25 @@ namespace OAuthProxy
 
         public RedirectResult GenerateTokenAndRedirect(string userName, Controller controller)
         {
-            var token = GenerateToken(controller);
+            string callbackUrl = null;
 
-            var encodedToken = HttpUtility.UrlEncode(token);
+                callbackUrl = controller.Request.Query["callbackurl"];
 
-            var logoutUrl = $"{controller.Request.Scheme}://{controller.Request.Host.Value}/user/Logout";
+                var token = GenerateToken(controller);
 
-            var encodedLogoutUrl = HttpUtility.UrlEncode(logoutUrl);
+                var encodedToken = HttpUtility.UrlEncode(token);
 
-            var encodeduserName = HttpUtility.UrlEncode(userName);
+                var logoutUrl = $"{controller.Request.Scheme}://{controller.Request.Host.Value}/user/Logout";
 
-            var redirectUrl = $"{this.config.RedirectUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
+                var encodedLogoutUrl = HttpUtility.UrlEncode(logoutUrl);
 
-            return controller.Redirect(redirectUrl);
-        }
+                var encodeduserName = HttpUtility.UrlEncode(userName);
+
+                // var redirectUrl = $"{this.config.RedirectUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
+                var redirectUrl = $"{callbackUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
+
+                return controller.Redirect(redirectUrl);
+                  }
 
         public string GenerateToken(Controller controller)
         {
