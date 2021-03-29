@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OAuthProxy;
 using OidcApp.Models.Entities;
 using OidcApp.Models.Providers;
 using OidcApp.Models.Repositories;
@@ -18,11 +19,13 @@ namespace OidcApp.Controllers
     {
         private readonly IUserRepo _repo;
         private readonly IUserManager _manager;
+        JwtTokenCreator jwtTokenCreator;
 
-        public UserController(IUserRepo repo, IUserManager manager)
+        public UserController(IUserRepo repo, IUserManager manager, JwtTokenCreator jwtTokenCreator)
         {
             _repo = repo;
             _manager = manager;
+            this.jwtTokenCreator = jwtTokenCreator;
         }
 
         [HttpGet, Route("[controller]/Login")]
@@ -45,10 +48,10 @@ namespace OidcApp.Controllers
             _manager.SignOut(this.HttpContext);
             if (Request.Query.ContainsKey("callbackurl"))
             {
-                return Redirect($"{Request.Query["callbackurl"]}");
+                return LocalRedirect($"~/?callbackurl={Request.Query["callbackurl"]}");
             }
             else
-                return LocalRedirect("~/");
+                return LocalRedirect($"~/");
         }
 
         [HttpGet, Route("[controller]/ExternalLogin")]
@@ -104,9 +107,15 @@ namespace OidcApp.Controllers
 
             await _repo.GetOrCreateExternalUserAsync(obj, HttpContext);
 
-            //return Redirect($"https://localhost:44320/inject/{HttpUtility.UrlEncode(token)}");
-            //return Redirect($"https://localhost:44316/admin2/user?token=/{HttpUtility.UrlEncode(token)}");
-            return LocalRedirect(string.IsNullOrEmpty(callbackUrl) ? "~/" : callbackUrl);
+            if (string.IsNullOrEmpty(callbackUrl) == false)
+            {
+                var res = jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);
+
+                return res;
+            }
+            else
+                // Not used.
+                return LocalRedirect("~/");
         }
     }
 }

@@ -29,7 +29,7 @@ namespace OidcApp.Controllers
             {
                 if (User.Identity.IsAuthenticated && User.Claims.Any(x => x.Type == System.Security.Claims.ClaimTypes.Name))
                 {
-
+                    // Creates the token if the user has already the authentication cookie.
                     var res = jwtTokenCreator.GenerateTokenAndRedirect(User.Identity.Name, this);
                     if (res != null)
                         return res;

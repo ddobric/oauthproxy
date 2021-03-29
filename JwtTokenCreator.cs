@@ -24,27 +24,34 @@ namespace OAuthProxy
             this.config = config;
         }
 
+
+        /// <summary>
+        /// Generates the JWT token and redirects th epage into the application by passing the token.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="controller"></param>
+        /// <returns></returns>
         public RedirectResult GenerateTokenAndRedirect(string userName, Controller controller)
         {
             string callbackUrl = null;
 
-                callbackUrl = controller.Request.Query["callbackurl"];
+            callbackUrl = controller.Request.Query["callbackurl"];
 
-                var token = GenerateToken(controller);
+            var token = GenerateToken(controller);
 
-                var encodedToken = HttpUtility.UrlEncode(token);
+            var encodedToken = HttpUtility.UrlEncode(token);
 
-                var logoutUrl = $"{controller.Request.Scheme}://{controller.Request.Host.Value}/user/Logout";
+            var logoutUrl = $"{controller.Request.Scheme}://{controller.Request.Host.Value}/user/Logout";
 
-                var encodedLogoutUrl = HttpUtility.UrlEncode(logoutUrl);
+            var encodedLogoutUrl = HttpUtility.UrlEncode(logoutUrl);
 
-                var encodeduserName = HttpUtility.UrlEncode(userName);
+            var encodeduserName = HttpUtility.UrlEncode(userName);
 
-                // var redirectUrl = $"{this.config.RedirectUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
-                var redirectUrl = $"{callbackUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
+            // var redirectUrl = $"{this.config.RedirectUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
+            var redirectUrl = $"{callbackUrl.TrimEnd('/')}/?token={encodedToken}&logouturl={encodedLogoutUrl}&username={encodeduserName}";
 
-                return controller.Redirect(redirectUrl);
-                  }
+            return controller.Redirect(redirectUrl);
+        }
 
         public string GenerateToken(Controller controller)
         {
@@ -75,7 +82,7 @@ namespace OAuthProxy
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
- 
+
             return tokenHandler.WriteToken(token);
         }
     }
