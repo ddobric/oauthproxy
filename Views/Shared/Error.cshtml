@@ -19,4 +19,7 @@ Assuming, that the calling application is listening at 'https://localhost:44391'
 
 
 <a href="@Context.Request.Scheme://@Context.Request.Host.Value/?callbackurl=https://localhost:44391">https://localhost:44390/home/?callbackurl=https://localhost:44391</a>
+<br/>
+You can alternativelly show the token information for testing purposes:
+<a href="@Context.Request.Scheme://@Context.Request.Host.Value/?callbackurl=@Context.Request.Scheme://@Context.Request.Host.Value/Home/Test">Go to test page!</a>
 

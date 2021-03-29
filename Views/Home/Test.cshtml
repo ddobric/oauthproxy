@@ -1,0 +1,29 @@
+﻿@inject OidcApp.Models.Entities.OidcProviders providers
+
+@{ ViewData["Title"] = "Test Page"; }
+
+<div class="text-center">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h3 class="display-4">Name: @User.Identity.Name</h3>
+        <h3 class="display-4">Provider: @User.Identity.AuthenticationType</h3>
+
+        <table>
+            @foreach (var claim in User.Claims)
+            {
+                <tr>
+                    <td>
+                        <p>Type:</p>  <strong>@claim.Type </strong>
+                    </td>
+                    <td>
+                        <p>Value:</p>  <strong>@claim.Value </strong>
+                    </td>
+                    <td>
+                        <p>Subject:</p>  <strong>@claim.Subject </strong>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>

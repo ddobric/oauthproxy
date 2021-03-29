@@ -46,6 +46,11 @@ namespace OidcApp.Controllers
             return View();
         }
 
+        public IActionResult Test()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [HttpGet, Route("[controller]/error/{msg}")]
         public IActionResult Error(string msg = null)
