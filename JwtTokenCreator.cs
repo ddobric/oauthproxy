@@ -53,7 +53,7 @@ namespace OAuthProxy
             return controller.Redirect(redirectUrl);
         }
 
-        public string GenerateToken(Controller controller)
+        public virtual string GenerateToken(Controller controller)
         {
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(this.config.Secret))
             {
@@ -99,7 +99,5 @@ namespace OAuthProxy
         /// Keyidentifier ofthe proxy instance.
         /// </summary>
         public string Kid { get; set; }
-
-        public string RedirectUrl { get; set; } = "https://localhost:44316/admin2/user?token={TOKEN}";
     }
 }

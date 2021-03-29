@@ -2,7 +2,8 @@
 @{ ViewData["Title"] = "Error"; }
 
 
-<h3 class="text-danger">An error occurred while processing your request.</h3>
+<h3>An error occurred while processing your request.</h3>
+
 <h1 class="text-danger"> @Model?.Error</h1>
 
 @if (Model.ShowRequestId)
@@ -14,8 +15,8 @@
 }
 
 <h3>Supported scenarios</h3>
-Assuming, that the calling application is listening at 'https://localhost:44391' and the OAuthProxy at 'https://localhost:44390', the application shoud navigate to the following url:<br/>
+Assuming, that the calling application is listening at 'https://localhost:44391' and the OAuthProxy at @Context.Request.Scheme://@Context.Request.Host.Value', the application shoud navigate to the following url:<br/>
 
 
-<a href="https://localhost:44390/home/?callbackurl=https://localhost:44391">https://localhost:44390/home/?callbackurl=https://localhost:44391</a>
+<a href="@Context.Request.Scheme://@Context.Request.Host.Value/?callbackurl=https://localhost:44391">https://localhost:44390/home/?callbackurl=https://localhost:44391</a>
 
