@@ -1,8 +1,6 @@
 # What is OAuthProxy
 
-The OAuthProxy is a very simple web application built on top of ASP.NET Core that authenticates the user against one of the selected social or business providers.
-After the user is authenticated, the obtained id-token issued by the provider is used to create a new JWT id-token, which is passed back to the application.
-It is built to help developers to implement their own identitz provider.
+The OAuthProxy is a straightforward web application developed using ASP.NET Core. It serves the purpose of authenticating users against various social or business providers. Once the user is authenticated, the received id-token from the provider is utilized to generate a new JWT id-token, which is then returned to the application. The OAuthProxy is designed to assist developers in implementing their own identity provider solutions.
 
 <img src="assets/OAuthProxy Architecture.png"></img>
 
