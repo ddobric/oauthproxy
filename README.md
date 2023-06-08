@@ -1,21 +1,18 @@
 # What is OAuthProxy
 
-The OAuthProxy is a very simple web application build on top of ASP.NET Core that authenticate the user aganist one of selected social or business provider.
-After the user is authenticated the obrained  *id-token* issued by the provider is used to create the new JWT id-token, that is passed bac the the application.
+The OAuthProxy is a very simple web application built on top of ASP.NET Core that authenticates the user against one of the selected social or business providers.
+After the user is authenticated, the obtained id-token issued by the provider is used to create a new JWT id-token, which is passed back to the application.
+It is built to help developers to implement their own identitz provider.
 
 <img src="assets/OAuthProxy Architecture.png"></img>
 
-When the SPA application like Blazor WASM standalone starts (1) at some moment the user might be required to logon. The BlazorApp reads the appSettings section
-that contains the *Authority*, which specifies the OAuthProxy. On long the app will simply redirect to the OAuthProxy (authority) and provides its
-base URL as a callback. The app will genarate following request (2):
+When the SPA application, like Blazor WASM standalone, starts (1), at some point the user might be required to log on. The BlazorApp reads the appSettings section that contains the Authority, which specifies the OAuthProxy. Along the way, the app will simply redirect to the OAuthProxy (authority) and provide its base URL as a callback. The app will generate the following request (2):
 
 ~~~
 https://oauthproxy.com/?callback=https://blazorapp.com  
 ~~~
 
-The OAuthProxy is a very simple webapplication that authenticates user, by chosen provider. Once the user is authenticated the webapplication will receive the JWT *id-token*.
-The trusted information is used to create the new JWT token issued by OAuthProxy. This is the oportunity for developers to
-create the token with any kind of claims similarly as idenetity server does it.
+Once the user is authenticated, the web application receives the JWT id-token. This trusted information is used to create a new JWT token issued by the OAuthProxy. This provides developers with the opportunity to create tokens with any kind of claims, similar to how an identity server does it.
 
 To create the token following configuration is used.
 
