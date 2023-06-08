@@ -61,6 +61,6 @@ Following snippet shows the JWT token created by the OAuthProxy:
 ~~~
 
 ### Creating custom tokens
-If you want to customize the token please overwrite the method *GenerateToken*. In this method you can implement any code that looks up your own database 
+If you want to customize the token please overwrite the method [GenerateToken](https://github.com/ddobric/oauthproxy/blob/67f3bbba32cf67fa4f10ef11453b4c15f7baac97/JwtTokenCreator.cs#L56). In this method you can implement any code that looks up your own database 
 and create set of required claims. it is extrimely simple way to create JWT tokens without of need too hook into ASP.NET extensibility system.
 
