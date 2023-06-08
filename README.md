@@ -4,7 +4,7 @@ The OAuthProxy is a straightforward web application developed using ASP.NET Core
 
 <img src="assets/OAuthProxy Architecture.png"></img>
 
-When the SPA application, like Blazor WASM standalone, starts (1), at some point the user might be required to log on. The BlazorApp reads the appSettings section that contains the Authority, which specifies the OAuthProxy. Along the way, the app will simply redirect to the OAuthProxy (authority) and provide its base URL as a callback. The app will generate the following request (2):
+When the application, like Blazor WASM standalone (just an example), starts (1), at some point the user might be required to log on. The BlazorApp reads the appSettings section that contains the Authority, which specifies the OAuthProxy. Along the way, the app will simply redirect to the OAuthProxy (authority) and provide its base URL as a callback. The app will generate the following request (2):
 
 ~~~
 https://oauthproxy.com/?callback=https://blazorapp.com  
